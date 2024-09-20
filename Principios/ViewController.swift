@@ -41,7 +41,8 @@ class ViewController: UIViewController {
         
         //si le ponemos ! o ? significa que puede ser nil
         var num1:Int!
-        //num1 = 6
+        num1 = 6
+        
         if let n = num1 {
             let num2 = 7 + n
             print(num2)
@@ -49,8 +50,23 @@ class ViewController: UIViewController {
             print("No se puede leer")
         }
         
+        //El if let ya desempaqueta el optional es basicamente como el !
+        if let res_minmax = menorMayor([7,12,-4,8,1,0,16,-2,14,1]){
+            print(res_minmax)
+        }
+        else{
+            print("ERROR, ARREGLO VACIO")
+        }
         /* CONCATENACION
         print("Mi nombre es " + nombre + "y mi apellido es: " + apellido) */
+        
+        /*TODOS LOS PARAMETROS QUE SE PASAN A UNA FUNCION SON LET */
+        
+        var y = 10
+        y += 5
+        print(y)
+        calcular(&y)
+        print(y)
     }
     
     func mostrar_saludo(nombre name:String, _ lastname:String = "#") {
@@ -104,6 +120,33 @@ class ViewController: UIViewController {
         //con el exclamacion se desempaqueta y ya no muestra el optional
         print(diccionario["direccion"]!)
         
+    }
+    
+    func menorMayor(_ arreglo:[Int]) -> (min:Int, max: Int)? {
+        if arreglo.count > 0{
+            
+            var menor = arreglo[0]
+            var mayor = arreglo[0]
+            
+            for i in 1..<arreglo.count{
+                if arreglo[i] < menor {
+                    menor = arreglo[i]
+                }
+                if arreglo[i] > mayor {
+                    mayor = arreglo[i]
+                }
+            }
+            return (menor,mayor)
+        }
+        return nil
+        
+    }
+    
+    /*Esto sirve para modificar una propiedad que se recibe en una funcion, pero ademas al mandar llamar la funcion
+     las propiedades deben mandarse con antes un &, ejemplo: calcular(&variable)*/
+    func calcular(_ x:inout Int){
+        x = x + 5
+        print(x)
     }
 
 
